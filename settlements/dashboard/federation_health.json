@@ -1,0 +1,1 @@
+{"peer1":{"latency_ms":45,"uptime_pct":98,"trust_drift":0.02},"peer2":{"latency_ms":52,"uptime_pct":95,"trust_drift":0.05},"peer3":{"latency_ms":48,"uptime_pct":97,"trust_drift":0.03}}

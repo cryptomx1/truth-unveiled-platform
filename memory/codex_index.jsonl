@@ -1,0 +1,4 @@
+{"segment": "segment_continuum_202510241240.json", "hash": "7786bbab22f5257e164b5baedda88d885c44330833c80ef749768768f74f819d", "cid": "Qm7786bbab22f525", "timestamp": "2025-10-24T12:40:00Z"}
+{"segment": "segment_telemetry_202510241241.json", "hash": "19a2f6b080daafab9387b4aa437f44e222f81c491715f10e5d2f58c4e07ab72d", "cid": "Qm19a2f6b080daaf", "timestamp": "2025-10-24T12:41:00Z"}
+{"segment": "segment_health_202510241242.json", "hash": "8926a9cb4c0655ee14b3d363de9f7661c3c26e880377d0b391e1edc9ba06de6a", "cid": "Qm8926a9cb4c065", "timestamp": "2025-10-24T12:42:00Z"}
+{"segment": "segment_consensus_202510241243.json", "hash": "6ab60120dbb515d8e55c2a03586f077ea5857cdf2541f012bcb6e97864360586", "cid": "Qm6ab60120dbb515", "timestamp": "2025-10-24T12:43:00Z"}

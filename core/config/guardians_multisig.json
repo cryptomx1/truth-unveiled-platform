@@ -1,0 +1,1 @@
+{  "threshold": 2,  "guardians": [    { "name": "CommanderMark", "id": "commander@truth.local" },    { "name": "GuardianAlpha", "id": "alpha@truth.local" },    { "name": "GuardianBeta",  "id": "beta@truth.local" }  ]}

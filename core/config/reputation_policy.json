@@ -1,0 +1,1 @@
+{  "version":"1.0.0",  "weights": {    "participation": 1.0,    "with_majority": 2.0,    "minority_penalty": 0.0,    "abstain_credit": 0.5  },  "kbr": {    "per_rep_point": 1.0,        // 1 reputation point → 1 KBR (pending)    "min_payout_threshold": 0.5   // queue small amounts too (kept visible)  }}
