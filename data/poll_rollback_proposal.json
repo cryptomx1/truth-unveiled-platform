@@ -1,1 +1,0 @@
-{"poll_id":"poll-rollback-20231024120000","question":"ROLLBACK: Revert 'Open Public Node Registration' policy due to anomaly spike?","reason":"Detected 5 anomalies across 5 nodes in the last hour.","created_at":"2023-10-24T12:00:00Z","proposed_by":"PolicyGateEnforcer","policy_target":"public_node_registration","current_value":true,"proposed_value":false}
