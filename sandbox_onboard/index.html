@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Truth Unveiled — Onboarding (Sandbox)</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div class="mosaic"></div>
+  <main class="wrap">
+    <h1>Truth Unveiled — Onboarding</h1>
+
+    <section class="card">
+      <h2>Step 1 — Understand & Generate Your Seed (12 words)</h2>
+      <p><b>DID</b> = your decentralized identity (e.g., <code>did:truth:abc123</code>) — it’s your identifier on-chain/off-chain.</p>
+      <p><b>CID</b> = Content ID — every published snapshot of your locker has a unique CID (immutable).</p>
+      <p><b>IPNS</b> = Name pointing to the latest CID (mutable, your stable link).</p>
+      <div class="row">
+        <button id="genSeed" class="btn">Generate Seed (12 words)</button>
+        <input id="seed" type="text" placeholder="Your seed will appear here" readonly />
+      </div>
+      <div class="tiny">Write your seed down. This is your sovereignty. Do not share it.</div>
+    </section>
+
+    <section class="card">
+      <h2>Step 2 — Set Up Your Authenticator (TOTP)</h2>
+      <div class="row">
+        <button id="initTotp" class="btn">Create Auth Secret</button>
+        <img id="qr" alt="QR" style="display:none;max-width:200px;border:1px solid rgba(0,183,255,.3);border-radius:8px"/>
+      </div>
+      <div class="row">
+        <input id="totp" type="text" placeholder="Enter the 6-digit code" />
+        <button id="verifyTotp" class="btn secondary">Verify</button>
+        <span id="totpStatus" class="tiny"></span>
+      </div>
+      <div class="tiny">Use Google Authenticator, Authy, or any TOTP app to scan the QR and get your 6-digit code.</div>
+    </section>
+
+    <section class="card">
+      <h2>Step 3 — Bind DID & Encrypt Locker</h2>
+      <div class="row">
+        <input id="did" type="text" placeholder="did:truth:yourid" />
+        <button id="bind" class="btn">Bind & Encrypt</button>
+        <span id="bindStatus" class="tiny"></span>
+      </div>
+      <div class="tiny">This writes DID to your locker, encrypts with your seed, and publishes a new CID to <b>Sandbox IPNS</b>.</div>
+    </section>
+
+    <section class="card">
+      <h2>Open Your Sandbox Locker</h2>
+      <div>Sandbox IPNS: <a id="sandboxIpns" target="_blank" rel="noreferrer">…</a></div>
+      <div class="tiny">This points to the latest sandbox CID only — production stays untouched.</div>
+    </section>
+  </main>
+  <script src="./app.js"></script>
+</body>
+</html>

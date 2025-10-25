@@ -1,0 +1,31 @@
+{
+  "name": "truth-unveiled",
+  "version": "1.0.0",
+  "description": "**Discover the Civic Genome**—a decentralized platform for mapping community DNA (governance, values, structures) using Web3 and AI. Truth, redefined by people—not algorithms.",
+  "main": "continuum_init.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cryptomx1/truth-unveiled-platform.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cryptomx1/truth-unveiled-platform/issues"
+  },
+  "homepage": "https://github.com/cryptomx1/truth-unveiled-platform#readme",
+  "dependencies": {
+    "@pinata/sdk": "^2.1.0",
+    "archiver": "^7.0.1",
+    "bip39": "^3.1.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "pinata-web3": "^0.5.4",
+    "qrcode": "^1.5.4",
+    "speakeasy": "^2.0.0"
+  }
+}

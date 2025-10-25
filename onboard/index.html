@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1"
+  />
+  <title>Truth Unveiled — Personal Data Locker (Control Deck)</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <div class="mosaic-bg"></div>
+
+  <header class="topbar">
+    <div class="brand">
+      <div class="orb"></div>
+      <span>Truth Unveiled — PDL Control Deck</span>
+    </div>
+    <div class="ipns">
+      <label>IPNS</label>
+      <a id="ipnsLink" href="#" target="_blank" rel="noreferrer"></a>
+    </div>
+  </header>
+
+  <main class="deck">
+    <aside class="tabs">
+      <button data-tab="cid" class="active">CID</button>
+      <button data-tab="node">Node</button>
+      <button data-tab="files">Files</button>
+      <button data-tab="logs">Logs</button>
+    </aside>
+
+    <section class="panel">
+      <!-- CID -->
+      <div class="tab" id="tab-cid">
+        <h2>Current Deployment</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>Resolved CID</h3>
+            <div class="mono"><span id="resolvedCid">…</span></div>
+            <div class="row">
+              <a id="viewIpfsCid" class="btn" target="_blank" rel="noreferrer">Open on Gateway</a>
+              <button id="copyCid" class="btn secondary">Copy</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Invitation / DID</h3>
+            <p>This deck can read your invite DID from the URL.</p>
+            <div class="mono"><span id="inviteDid">—</span></div>
+  <input id="encPass" type="password" placeholder="Passphrase (min 6 chars)" style="margin-top: 8px; width: 100%; padding: 8px;" />
+  <div class="row">
+    <button id="bindDid" class="btn">Bind DID to Locker</button>
+    <button id="bindDidEncrypted" class="btn secondary">Bind & Encrypt</button>
+    <span id="bindDidStatus" class="tiny"></span>
+  </div>
+            <div class="tiny">Tip: your onboarding UI linked here with <code>?invite=did:truth:…</code></div>
+          </div>
+
+          <div class="card">
+            <h3>Verify on Network (DHT)</h3>
+            <p>This CID was announced by your node. Use your local tools to verify peers.</p>
+            <pre class="mono">
+ipfs dht findprovs &lt;CID&gt; | head -n 10
+            </pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- Node -->
+      <div class="tab hidden" id="tab-node">
+        <h2>Node Status</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>Local Gateway</h3>
+            <p>Quick links (works on your node machine):</p>
+            <ul>
+              <li><a href="http://127.0.0.1:8080/ipns/" target="_blank" rel="noreferrer">Local IPNS root</a></li>
+              <li><a id="localIpnsLink" target="_blank" rel="noreferrer">This deck (local)</a></li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>PM2 Watcher</h3>
+            <p>Expected: <code>ipfs-watcher</code> running.</p>
+            <pre class="mono">
+pm2 status ipfs-watcher
+pm2 logs ipfs-watcher --lines 50
+            </pre>
+          </div>
+          <div class="card">
+            <h3>Publish New Snapshot</h3>
+            <p>Use the verified updater (from your node):</p>
+            <pre class="mono">
+node /home/mark/projects/truth-unveiled/update-ipfs.cjs
+            </pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- Files -->
+      <div class="tab hidden" id="tab-files">
+        <h2>Locker Files</h2>
+        <div class="card">
+          <p>
+            For *live, honest* uploads, connect directly to your node’s IPFS HTTP API.
+            Enter your API endpoint (default local: <code>http://127.0.0.1:5001/api/v0/add</code>) and use the uploader below.
+          </p>
+
+          <div class="row">
+            <input id="apiEndpoint" type="text" placeholder="http://127.0.0.1:5001/api/v0/add" />
+            <input id="fileInput" type="file" />
+            <button id="uploadBtn" class="btn">Upload</button>
+          </div>
+
+          <div class="tiny">
+            This posts directly to your node. Gateways that don’t expose the HTTP API will not work.
+          </div>
+
+          <div id="uploadResult" class="result mono"></div>
+        </div>
+
+        <div class="card">
+          <h3>Helpful CLI</h3>
+          <pre class="mono">
+ipfs add -r . --cid-version=1 --quieter | tail -n 1 | xargs -I{} ipfs name publish /ipfs/{}
+          </pre>
+        </div>
+      </div>
+
+      <!-- Logs -->
+      <div class="tab hidden" id="tab-logs">
+        <h2>Deployment Logs</h2>
+        <div class="card">
+          <p>Reading from your published <code>/logs/ipfs_update.log</code> to show the last events.</p>
+          <pre id="logs" class="mono small">Loading logs…</pre>
+          <div class="row">
+            <button id="refreshLogs" class="btn secondary">Refresh</button>
+            <a id="openLogsRaw" class="btn" target="_blank" rel="noreferrer">Open raw</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="./app.js"></script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Inter:wght@300;400;500&display=swap");
+
+:root {
+  --bg: #040611;
+  --panel: rgba(20,26,40,0.65);
+  --border: rgba(0,183,255,0.3);
+  --glow: rgba(0,183,255,0.25);
+  --text: #e8f1ff;
+  --muted: #9ab3d1;
+  --accent1: #0078d7;
+  --accent2: #00b4ff;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; color: var(--text); background: var(--bg); font-family: Inter, system-ui, sans-serif; }
+a { color: var(--accent2); }
+
+.mosaic-bg {
+  position: fixed; inset: 0;
+  background: radial-gradient(circle at center, #0e1625 0%, #040611 100%);
+  background-image: repeating-linear-gradient(
+    45deg, rgba(0,183,255,0.07) 0, rgba(0,183,255,0.07) 2px, transparent 2px, transparent 10px
+  );
+  animation: float 20s linear infinite;
+  z-index: 0;
+}
+@keyframes float { 0%{background-position:0 0} 100%{background-position:1000px 1000px} }
+
+.topbar {
+  position: relative; z-index: 1;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 14px 22px; border-bottom: 1px solid var(--border);
+  background: rgba(6,10,20,0.55); backdrop-filter: blur(10px);
+}
+.brand { display: flex; align-items: center; gap: 10px; font-family: Orbitron, Inter, sans-serif; }
+.brand .orb {
+  width: 14px; height: 14px; border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, var(--accent2), var(--accent1));
+  box-shadow: 0 0 12px var(--glow);
+}
+.ipns { display: flex; align-items: center; gap: 10px; color: var(--muted); }
+.ipns label { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; }
+
+.deck { position: relative; z-index: 1; display: grid; grid-template-columns: 220px 1fr; gap: 20px; height: calc(100vh - 60px); }
+.tabs {
+  border-right: 1px solid var(--border); background: rgba(6,10,20,0.35); backdrop-filter: blur(8px);
+  padding: 12px; display: flex; flex-direction: column; gap: 8px;
+}
+.tabs button {
+  background: transparent; color: var(--text);
+  border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; cursor: pointer;
+}
+.tabs button.active { background: rgba(0,183,255,0.15); box-shadow: 0 0 12px var(--glow); }
+
+.panel { padding: 20px; overflow: auto; }
+.tab.hidden { display: none; }
+
+h2 { margin: 8px 0 14px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap: 16px; }
+.card {
+  background: var(--panel); border: 1px solid var(--border); border-radius: 14px; padding: 18px;
+  box-shadow: 0 0 24px var(--glow); backdrop-filter: blur(10px);
+}
+
+.row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.btn {
+  background: linear-gradient(90deg, var(--accent1), var(--accent2));
+  border: none; color: white; padding: 10px 14px; border-radius: 8px; cursor: pointer; text-decoration: none;
+}
+.btn.secondary {
+  background: transparent; border: 1px solid var(--border); color: var(--text);
+}
+.mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; word-break: break-all; }
+.small { font-size: 12px; }
+.tiny { font-size: 12px; color: var(--muted); margin-top: 6px; }
+
+input[type="text"], input[type="file"] {
+  background: rgba(6,10,20,0.55); border: 1px solid var(--border); color: var(--text);
+  padding: 10px 12px; border-radius: 8px;
+}
+.result { margin-top: 10px; padding: 10px; background: rgba(0,183,255,0.08); border-radius: 8px; }

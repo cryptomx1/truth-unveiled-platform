@@ -1,1 +1,1 @@
-{"phase":"X","task":"zebec_verification","initiator":"CommanderMark","protocol":"Truth-Unveiled","verify_streams":true,"match_pohc":true,"generate_audit":true,"commit_to_ipfs":true,"link_to_cid":"QmYwAPJzv5CZsnAztECVVwQc5qBJMqCKU8n6GjWk6XvGnA","signer":"GrokCLI"}
+{"phase":"X","task":"zebec_verification","initiator":"CommanderMark","protocol":"Truth-Unveiled","verify_streams":true,"match_pohc":true,"generate_audit":true,"commit_to_ipfs":true,"link_to_cid":"dynamic","signer":"GrokCLI"}

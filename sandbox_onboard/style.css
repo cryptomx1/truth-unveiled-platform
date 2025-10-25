@@ -1,0 +1,13 @@
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Inter:wght@300;400;500&display=swap");
+:root { --bg:#040611; --panel:rgba(20,26,40,.65); --border:rgba(0,183,255,.3); --glow:rgba(0,183,255,.25); --text:#e8f1ff; --muted:#9ab3d1; --a1:#0078d7; --a2:#00b4ff; }
+*{box-sizing:border-box} html,body{margin:0;height:100%;background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif}
+a{color:var(--a2)} .mosaic{position:fixed;inset:0;background:radial-gradient(circle at center,#0e1625 0%,#040611 100%),repeating-linear-gradient(45deg,rgba(0,183,255,.07)0,rgba(0,183,255,.07)2px,transparent 2px,transparent 10px);animation:float 20s linear infinite;z-index:0}
+@keyframes float{0%{background-position:0 0}100%{background-position:1000px 1000px}}
+.wrap{position:relative;z-index:1;max-width:980px;margin:40px auto;padding:0 16px}
+h1{font-family:Orbitron,Inter,sans-serif;margin:0 0 18px}
+.card{background:var(--panel);border:1px solid var(--border);box-shadow:0 0 24px var(--glow);backdrop-filter:blur(10px);border-radius:14px;padding:18px;margin:16px 0}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+input[type="text"]{flex:1;min-width:280px;padding:10px 12px;background:rgba(6,10,20,.55);border:1px solid var(--border);border-radius:8px;color:var(--text)}
+.btn{background:linear-gradient(90deg,var(--a1),var(--a2));border:none;color:#fff;padding:10px 14px;border-radius:8px;cursor:pointer}
+.btn.secondary{background:transparent;border:1px solid var(--border)}
+.tiny{font-size:12px;color:var(--muted);margin-top:6px}
