@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JasmyNetwork — Live Node Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <meta http-equiv="refresh" content="60">
+  <style>
+    body {
+      background-color: #0a0a0a;
+      color: #00ffcc;
+      font-family: 'Roboto', sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+    h1 { color: #00ffff; margin-top: 20px; }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      width: 90%;
+      margin: auto;
+    }
+    .card {
+      background: #111;
+      border: 1px solid #00ffcc;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 0 10px #00ffcc33;
+    }
+    canvas {
+      background: #000;
+      border-radius: 10px;
+      padding: 10px;
+    }
+    footer {
+      margin-top: 40px;
+      font-size: 0.8em;
+      color: #00aaaa;
+    }
+  </style>
+</head>
+<body>
+  <h1>🧭 JasmyNetwork — Live Node Telemetry</h1>
+  <div id="summary"></div>
+
+  <div class="grid">
+    <div class="card"><canvas id="cpuChart"></canvas></div>
+    <div class="card"><canvas id="memChart"></canvas></div>
+    <div class="card"><canvas id="gpuChart0"></canvas></div>
+    <div class="card"><canvas id="gpuChart1"></canvas></div>
+  </div>
+
+  <footer>Auto-refreshing every 60s | Powered by Truth Unveiled Systems</footer>
+
+  <script>
+    async function fetchTelemetry() {
+      const res = await fetch('/telemetry.json');
+      return await res.json();
+    }
+
+    async function renderCharts() {
+      const telemetry = await fetchTelemetry();
+      const last = telemetry[telemetry.length - 1];
+      const load = last.load.split(',');
+      const memParts = last.mem.split(/[M\\/]/);
+      const memUsed = parseInt(memParts[0]);
+      const memTotal = parseInt(memParts[2]);
+      const memPct = ((memUsed / memTotal) * 100).toFixed(1);
+
+      const gpuParts = last.gpu.split(';').map(g => g.split(','));
+      const gpu0 = { util: gpuParts[0][1], temp: gpuParts[0][3] };
+      const gpu1 = { util: gpuParts[1][1], temp: gpuParts[1][3] };
+
+      document.getElementById('summary').innerHTML = `
+        <h2>Node Status</h2>
+        <p><b>Timestamp:</b> ${last.ts || last.timestamp}</p>
+        <p><b>Memory:</b> ${memUsed} / ${memTotal} MiB (${memPct}%)</p>
+        <p><b>GPU0:</b> ${gpu0.util}% @ ${gpu0.temp}°C | <b>GPU1:</b> ${gpu1.util}% @ ${gpu1.temp}°C</p>
+      `;
+
+      new Chart(document.getElementById('cpuChart'), {
+        type: 'line',
+        data: {
+          labels: ['1m','5m','15m'],
+          datasets: [{
+            label: 'CPU Load',
+            data: load.map(x=>parseFloat(x)),
+            borderColor: '#00ffff',
+            backgroundColor: '#00ffff44',
+            fill: true,
+            tension: 0.3
+          }]
+        },
+        options: {
+          plugins: { legend: { display: false } },
+          scales: { y: { beginAtZero: true } }
+        }
+      });
+
+      new Chart(document.getElementById('memChart'), {
+        type: 'bar',
+        data: {
+          labels: ['Memory'],
+          datasets: [{
+            label: 'Memory Usage',
+            data: [memPct],
+            backgroundColor: '#00ffccaa'
+          }]
+        },
+        options: {
+          indexAxis: 'y',
+          scales: { x: { min: 0, max: 100 } }
+        }
+      });
+
+      [gpu0, gpu1].forEach((gpu, i) => {
+        new Chart(document.getElementById(`gpuChart${i}`), {
+          type: 'doughnut',
+          data: {
+            labels: ['Utilization', 'Remaining'],
+            datasets: [{
+              data: [gpu.util, 100 - gpu.util],
+              backgroundColor: ['#00ff99','#003333']
+            }]
+          },
+          options: {
+            plugins: {
+              title: { display: true, text: `GPU${i} — ${gpu.temp}°C`, color:'#00ffff' },
+              legend: { display: false }
+            }
+          }
+        });
+      });
+    }
+
+    renderCharts();
+  </script>
+</body>
+</html>
