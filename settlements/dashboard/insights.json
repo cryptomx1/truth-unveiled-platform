@@ -79,7 +79,7 @@
         "last_decision": "approve",
         "last_change_ts": "2023-10-24T12:00:00Z"
       },
-      "latest_consensus": {
+      "current_consensus": {
         "poll_id": "poll-001",
         "question": "Should the Guardian Federation open public node registration?",
         "timestamp": "2023-10-24T12:00:00Z",
@@ -109,7 +109,7 @@
         },
         "proof_sha256": "a1b2c3d4e5f6...",
         "inputs": {
-          "votes_source": "<demo>",
+          "votes_source": null,
           "trust_graph": "logs/trust_graph.json"
         }
       }

@@ -1,0 +1,76 @@
+#!/bin/bash
+
+# Grok CLI with self-heal and session management
+
+GROK_DIR="$HOME/.grok"
+SNAPSHOT="$GROK_DIR/session_snapshot.json"
+LOG="$GROK_DIR/federated_log.jsonl"
+
+# Ensure directories exist
+mkdir -p "$GROK_DIR"
+
+# Function to log events
+log_event() {
+  local agent="$1"
+  local event="$2"
+  local command="$3"
+  local task="$4"
+  echo "{\"timestamp\":\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\",\"agent\":\"$agent\",\"event\":\"$event\",\"command\":\"$command\",\"task\":\"$task\"}" >> "$LOG"
+}
+
+# Check for restore flag
+if [ "$1" = "--restore" ]; then
+  if [ -f "$SNAPSHOT" ]; then
+    cwd=$(jq -r '.cwd' "$SNAPSHOT")
+    active_task=$(jq -r '.active_task' "$SNAPSHOT")
+    session_id=$(jq -r '.session_id' "$SNAPSHOT")
+    context=$(jq -r '.context' "$SNAPSHOT")
+    echo "Restoring session: $session_id - $active_task"
+    cd "$cwd" || exit 1
+    echo "Context: $context"
+    # Resume session logic here
+  else
+    echo "No snapshot to restore."
+  fi
+  exit 0
+fi
+
+# Save snapshot before starting
+save_snapshot() {
+  cat > "$SNAPSHOT" <<EOF
+{
+  "cwd": "$(pwd)",
+  "active_task": "${active_task:-unknown}",
+  "session_id": "${session_id:-$(date +%Y_%m_%dT%H_%M)}",
+  "context": "${context:-default}"
+}
+EOF
+}
+
+# Self-heal check
+if [ -n "$exit_code" ] && [ "$exit_code" -ne 0 ] && [ "$tty_restored" = "true" ]; then
+  echo "⚕️ Detected abnormal termination. Restoring previous context..."
+  exec "$0" --restore "$SNAPSHOT"
+fi
+
+# Main loop
+while true; do
+  save_snapshot
+  echo "Type your request in natural language..."
+  read -r input
+
+  # Sanitize input: escape markdown
+  sanitized_input=$(echo "$input" | sed 's/###/\\###/g; s/```bash/\\```bash/g; s/>/\\>/g')
+
+  log_event "Grok" "input" "$sanitized_input" "$active_task"
+
+  # Process input (placeholder)
+  echo "Processing: $sanitized_input"
+
+  # Simulate processing
+  if [ "$sanitized_input" = "exit" ]; then
+    break
+  fi
+done
+
+echo "Session ended."

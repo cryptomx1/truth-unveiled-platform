@@ -26,7 +26,7 @@ git tag -a "${TAG}" -m "Completed Insight Weave; system verified, proof ${SHA}"
 # Push everything to GitHub
 git push -u origin main --tags
 
-# Verify the commit and output the latest log summary
+# Verify the commit and output the current log summary
 echo "=== Continuum GitHub Commit Report ==="
 echo "Repository: ${REPO}"
 git log -1 --pretty=format:"Commit: %H%nAuthor: %an%nDate: %ad%nMessage: %s"

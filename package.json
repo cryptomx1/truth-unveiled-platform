@@ -24,8 +24,11 @@
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
+    "ipfs-http-client": "^60.0.1",
     "pinata-web3": "^0.5.4",
+    "puppeteer": "^24.26.1",
     "qrcode": "^1.5.4",
     "speakeasy": "^2.0.0"
-  }
+  },
+  "type": "module"
 }

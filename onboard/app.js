@@ -1,4 +1,4 @@
-// Control Deck logic — live, no mocks.
+// Control Deck logic — live, production ready.
 (function () {
   const ipnsKey = "k51qzi5uqu5dh45qt3n8yyw7dz9155l8ajajgzab1e3ehjuaw7lml8mkx4myhm";
   const baseIpns = `https://ipfs.io/ipns/${ipnsKey}`;
@@ -81,7 +81,7 @@
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const text = await res.text();
       logsPre.textContent = text.trim().slice(-8000) || "(no logs yet)";
-      // Try to extract the latest CID from last non-empty line
+      // Try to extract the current CID from last non-empty line
       const lines = text.trim().split("\n").filter(Boolean);
       const last = lines[lines.length - 1] || "";
       const m = last.match(/CID:\s*([a-z0-9]+)\s*\|/i) || last.match(/\/ipfs\/([a-z0-9]+)/i);

@@ -20,8 +20,8 @@
   sandboxIpnsA.href = `https://ipfs.io/ipns/${SANDBOX_IPNS}`;
 
   genSeedBtn.addEventListener("click", async ()=>{
-    const j = await fetch("http://127.0.0.1:7080/seed/new").then(r=>r.json());
-    if (j.ok) seedInput.value = j.mnemonic;
+    const j = await fetch("http://127.0.0.1:7078/seed/new").then(r=>r.json());
+    if (j.ok) seedInput.value = j.seed;
   });
 
   initTotpBtn.addEventListener("click", async ()=>{

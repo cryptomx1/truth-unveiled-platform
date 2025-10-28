@@ -1,0 +1,20 @@
+{
+  "did:truth:9430579218809d8d": {
+    "fingerprint": "be067f01f35f54ad955ca2cc1fb9b2a788e38fb30536370fed77a252724491f4",
+    "created": "2025-10-27T04:40:09.046Z"
+  },
+  "did:truth:1987fcb3ac27351b": {
+    "created": "2025-10-27T05:28:18.316Z",
+    "cid": "QmVpL8YfPQ4QSDQp8qnFyC7ceYtE1auyQdN3cYX4ZWe3u3",
+    "ipns": "k51qzi5uqu5divp3uwp6oiu8ierlz3ok6uc9zhcuv6rt5vb6223rv909hdl95y",
+    "ipnsKeyId": "k51qzi5uqu5divp3uwp6oiu8ierlz3ok6uc9zhcuv6rt5vb6223rv909hdl95y"
+  },
+  "did:truth:96c4aa289fc5c640": {
+    "created": "2025-10-28T01:31:03.362Z",
+    "fingerprint": "b86a51056565843aab310b289550f2b358060148e7201ebbccdfeb452875af4b"
+  },
+  "did:truth:4891fe636729192b": {
+    "created": "2025-10-28T01:54:54.374Z",
+    "fingerprint": "38e1ae71abb3987b9fc4b0c3ff42d38e60f44c4ec10f88cfc8f469aef6136d70"
+  }
+}

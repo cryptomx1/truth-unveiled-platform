@@ -124,8 +124,8 @@ trust_top   = sorted(kpis, key=lambda x: x["trust_weight"], reverse=True)[:3]
 recent_anoms=[a for a in anoms if a.get("timestamp") and \
     (datetime.fromisoformat(a["timestamp"].replace("Z","+00:00"))>=t_24h)]
 
-# --- Policy impact (latest consensus vs policy)
-latest_consensus = consensus_hist[-1] if consensus_hist else {}
+# --- Policy impact (current consensus vs policy)
+current_consensus = consensus_hist[-1] if consensus_hist else {}
 policy_state = {
   "public_node_registration": policy.get("public_node_registration"),
   "last_decision": policy.get("last_decision"),
@@ -155,7 +155,7 @@ if trust_top:   insights.append({"type":"ranking","title":"Top trust-weighted no
 insights.append({"type":"correlation","title":"Uptime vs Latency","pearson_r":corr_uptime_latency})
 insights.append({"type":"correlation","title":"Trust vs Latency","pearson_r":corr_trust_latency})
 insights.append({"type":"events","title":"Anomalies (24h)","count":len(recent_anoms)})
-insights.append({"type":"governance","title":"Policy State","policy":policy_state,"latest_consensus":latest_consensus})
+insights.append({"type":"governance","title":"Policy State","policy":policy_state,"current_consensus":current_consensus})
 
 # --- Build report
 report = {

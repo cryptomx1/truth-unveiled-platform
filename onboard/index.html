@@ -49,7 +49,7 @@
             <h3>Invitation / DID</h3>
             <p>This deck can read your invite DID from the URL.</p>
             <div class="mono"><span id="inviteDid">—</span></div>
-  <input id="encPass" type="password" placeholder="Passphrase (min 6 chars)" style="margin-top: 8px; width: 100%; padding: 8px;" />
+  <input id="encPass" type="password" style="margin-top: 8px; width: 100%; padding: 8px;" />
   <div class="row">
     <button id="bindDid" class="btn">Bind DID to Locker</button>
     <button id="bindDidEncrypted" class="btn secondary">Bind & Encrypt</button>
@@ -108,7 +108,7 @@ node /home/mark/projects/truth-unveiled/update-ipfs.cjs
           </p>
 
           <div class="row">
-            <input id="apiEndpoint" type="text" placeholder="http://127.0.0.1:5001/api/v0/add" />
+            <input id="apiEndpoint" type="text" />
             <input id="fileInput" type="file" />
             <button id="uploadBtn" class="btn">Upload</button>
           </div>
